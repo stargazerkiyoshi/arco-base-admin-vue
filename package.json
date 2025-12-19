@@ -4,9 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "dev": "vite --mode dev",
+    "build": "vue-tsc -b && vite build --mode prod",
     "preview": "vite preview",
+    "dev:test": "vite --mode test",
+    "dev:pre": "vite --mode pre",
+    "build:test": "vue-tsc -b && vite build --mode test",
+    "build:pre": "vue-tsc -b && vite build --mode pre",
+    "build:dev": "vue-tsc -b && vite build --mode prod",
     "lint": "eslint .",
     "format": "prettier --write .",
     "prepare": "husky install"
