@@ -10,7 +10,8 @@ export default defineConfig(({ mode }) => ({
     viteMockServe({
       mockPath: 'mock',
       watchFiles: true,
-      enable: mode === 'development',
+      // Enable mock server in all non-prod modes (dev/test/pre/etc.)
+      enable: mode !== 'prod' && mode !== 'production',
     }) as PluginOption,
   ],
   resolve: {

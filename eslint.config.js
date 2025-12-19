@@ -31,7 +31,8 @@ export default tseslint.config(
         parser: tseslint.parser,
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: './tsconfig.app.json',
+        // Explicitly disable type-aware parsing for SFCs to avoid TS project lookups.
+        project: null,
         tsconfigRootDir: import.meta.dirname,
         extraFileExtensions: ['.vue'],
       },
@@ -46,6 +47,16 @@ export default tseslint.config(
         sourceType: 'module',
         project: './tsconfig.node.json',
         tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
+    languageOptions: {
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        localStorage: 'readonly',
+        console: 'readonly',
       },
     },
   },

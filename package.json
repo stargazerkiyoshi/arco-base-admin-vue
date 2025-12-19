@@ -13,12 +13,9 @@
     "build:pre": "vue-tsc -b && vite build --mode pre",
     "build:dev": "vue-tsc -b && vite build --mode prod",
     "lint": "eslint .",
+    "lint-staged": "lint-staged --config ./lint-staged.config.mjs",
     "format": "prettier --write .",
     "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.{js,ts,jsx,tsx,vue}": "pnpm exec eslint --fix",
-    "*": "pnpm exec prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@arco-design/web-vue": "^2.57.0",

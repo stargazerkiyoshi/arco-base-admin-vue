@@ -1,9 +1,11 @@
-import { get } from './http';
+import type { LoginRequest, LoginResponse } from '@/types/api/auth';
+import type { FetchUserInfoResponse } from '@/types/api/user';
+import type { UserInfo } from '@/types/models/user';
+import { get, post } from './http';
 
-export interface UserInfo {
-  id: number;
-  name: string;
-  role: string;
-}
+const baseUrl = '/user';
 
-export const fetchUserInfo = (params: UserInfo) => get<UserInfo>('/api/user/info', { params });
+export const login = (data: LoginRequest) => post<LoginResponse>(`${baseUrl}/login`, data);
+
+export const fetchUserInfo = (params: Partial<UserInfo>) =>
+  get<FetchUserInfoResponse>(`${baseUrl}/info`, { params });

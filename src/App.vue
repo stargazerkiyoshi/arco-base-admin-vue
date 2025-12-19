@@ -6,6 +6,7 @@
         <nav class="flex gap-4 text-sm font-medium text-slate-600">
           <RouterLink to="/" class="hover:text-slate-900">Home</RouterLink>
           <RouterLink to="/about" class="hover:text-slate-900">About</RouterLink>
+          <RouterLink to="/login" class="hover:text-slate-900">Login</RouterLink>
         </nav>
       </div>
     </header>

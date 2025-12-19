@@ -4,6 +4,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
+import { storage } from '@/utils/storage';
 
 export interface ApiResponse<T> {
   code?: number;
@@ -22,7 +23,7 @@ const httpClient: AxiosInstance = axios.create({
 
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
+    const token = storage.get<string>('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
