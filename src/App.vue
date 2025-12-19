@@ -1,30 +1,16 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="min-h-screen bg-slate-50 text-slate-900">
+    <header class="border-b border-slate-200 bg-white">
+      <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+        <div class="text-lg font-semibold">Arco Base Admin</div>
+        <nav class="flex gap-4 text-sm font-medium text-slate-600">
+          <RouterLink to="/" class="hover:text-slate-900">Home</RouterLink>
+          <RouterLink to="/about" class="hover:text-slate-900">About</RouterLink>
+        </nav>
+      </div>
+    </header>
+    <main class="mx-auto max-w-5xl px-6 py-10">
+      <RouterView />
+    </main>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>

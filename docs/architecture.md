@@ -8,21 +8,20 @@
 
 ### 1.1 产品定位
 
-* **不是**只做几个页面，而是做一套“后台项目脚手架产品”。
-* 核心价值：
-
-  * 统一架构、规范、通用能力（权限/菜单/CRUD/字典/请求层/布局）。
-  * 让新增一个模块（列表+表单闭环）时间可控、成本极低。
+- **不是**只做几个页面，而是做一套“后台项目脚手架产品”。
+- 核心价值：
+  - 统一架构、规范、通用能力（权限/菜单/CRUD/字典/请求层/布局）。
+  - 让新增一个模块（列表+表单闭环）时间可控、成本极低。
 
 ### 1.2 交付物清单
 
-* 可运行 Demo（本地/测试环境可跑）
-* 标准 Layout（侧边栏/顶栏/面包屑/标签页可选/个人中心/主题切换）
-* 权限系统（页面 + 按钮级）
-* 通用 CRUD 能力（ProTable/ProForm/ProModalForm/ProDescriptions）
-* 字典/枚举系统（本地+远程，缓存策略）
-* 基础设施（request 封装、错误处理、日志、mock、环境配置）
-* 文档与模板（README、新增模块指南、规范、可选代码生成）
+- 可运行 Demo（本地/测试环境可跑）
+- 标准 Layout（侧边栏/顶栏/面包屑/标签页可选/个人中心/主题切换）
+- 权限系统（页面 + 按钮级）
+- 通用 CRUD 能力（ProTable/ProForm/ProModalForm/ProDescriptions）
+- 字典/枚举系统（本地+远程，缓存策略）
+- 基础设施（request 封装、错误处理、日志、mock、环境配置）
+- 文档与模板（README、新增模块指南、规范、可选代码生成）
 
 ---
 
@@ -30,18 +29,18 @@
 
 ### 2.1 第一阶段必做（MVP）
 
-* 登录/退出/Token 管理（可先 mock）
-* 基础 Layout 与路由体系
-* RBAC 权限最小闭环（用户-角色-权限-菜单）
-* 1~2 个“典型业务模块”闭环（用户管理/字典管理）
-* 通用组件抽象（至少 ProTable + ProModalForm）
+- 登录/退出/Token 管理（可先 mock）
+- 基础 Layout 与路由体系
+- RBAC 权限最小闭环（用户-角色-权限-菜单）
+- 1~2 个“典型业务模块”闭环（用户管理/字典管理）
+- 通用组件抽象（至少 ProTable + ProModalForm）
 
 ### 2.2 第一阶段不做（避免发散）
 
-* 微前端/多仓 monorepo（先不）
-* 国际化（可预留结构，后续加）
-* 完整审批流/复杂工作流（先不）
-* 大而全的低代码平台（先做“半配置化”通用组件）
+- 微前端/多仓 monorepo（先不）
+- 国际化（可预留结构，后续加）
+- 完整审批流/复杂工作流（先不）
+- 大而全的低代码平台（先做“半配置化”通用组件）
 
 ---
 
@@ -59,27 +58,27 @@
 
 ### 4.1 推荐技术栈（稳定可维护）
 
-* Vue 3 + Vite
-* Vue Router
-* Pinia
-* TypeScript（强烈建议）
-* Arco Design Vue
-* Axios（统一封装 request）
-* ESLint + Prettier（可选 Stylelint）
-* Husky + lint-staged（保证代码质量）
+- Vue 3 + Vite
+- Vue Router
+- Pinia
+- TypeScript（强烈建议）
+- Arco Design Vue
+- Axios（统一封装 request）
+- ESLint + Prettier（可选 Stylelint）
+- Husky + lint-staged（保证代码质量）
 
 > 说明：本 Demo 的价值在于“可复制与可维护”，TS 与规范工具对长期收益巨大。
 
 ### 4.2 环境与配置
 
-* `.env.development / .env.test / .env.production`
-* 统一配置入口：`src/config`（baseURL、开关、主题默认值等）
-* Dev proxy：按接口前缀转发
+- `.env.dev / .env.test / .env.pre / .env.prod`
+- 统一配置入口：`src/config`（baseURL、开关、主题默认值等）
+- Dev proxy：按接口前缀转发
 
 ### 4.3 Mock 策略（可插拔）
 
-* 方案 A：vite-plugin-mock（简单直接）
-* 方案 B：MSW（更真实，接近线上）
+- 方案 A：vite-plugin-mock（简单直接）
+- 方案 B：MSW（更真实，接近线上）
 
 ---
 
@@ -94,14 +93,14 @@
 
 ### 5.2 Demo 必备页面（建议最小集）
 
-* 登录页
-* 工作台
-* 用户管理（典型 CRUD 闭环）
-* 角色管理（绑定权限）
-* 菜单管理（生成侧栏与路由）
-* 字典管理（枚举/标签渲染来源）
-* 操作日志（表格筛选 + 详情）
-* 个人中心（基本信息/修改密码）
+- 登录页
+- 工作台
+- 用户管理（典型 CRUD 闭环）
+- 角色管理（绑定权限）
+- 菜单管理（生成侧栏与路由）
+- 字典管理（枚举/标签渲染来源）
+- 操作日志（表格筛选 + 详情）
+- 个人中心（基本信息/修改密码）
 
 ---
 
@@ -109,35 +108,34 @@
 
 ### 6.1 模型
 
-* User：用户
-* Role：角色
-* Permission：权限点（按钮/接口）
-* Menu：菜单（页面入口）
+- User：用户
+- Role：角色
+- Permission：权限点（按钮/接口）
+- Menu：菜单（页面入口）
 
 ### 6.2 权限粒度
 
-* **页面级**：能否看到菜单、能否进入路由
-* **按钮级**：能否看到/点击新增、删除、导入、导出等
+- **页面级**：能否看到菜单、能否进入路由
+- **按钮级**：能否看到/点击新增、删除、导入、导出等
 
 ### 6.3 路由与菜单策略（建议双模式）
 
-* 默认（MVP）：前端静态路由 + 权限过滤 + 菜单映射
-* 可升级：后端下发菜单树（包含组件路径/权限/可见性）
+- 默认（MVP）：前端静态路由 + 权限过滤 + 菜单映射
+- 可升级：后端下发菜单树（包含组件路径/权限/可见性）
 
 ### 6.4 权限使用方式（统一入口）
 
-* 指令：`v-permission="['sys:user:add']"`
-* 组件：`<Auth :value="['sys:user:add']">...</Auth>`
-* 工具方法：`hasPerm('sys:user:add')`
+- 指令：`v-permission="['sys:user:add']"`
+- 组件：`<Auth :value="['sys:user:add']">...</Auth>`
+- 工具方法：`hasPerm('sys:user:add')`
 
 ### 6.5 权限编码规范（强制）
 
-* 统一格式：`{domain}:{resource}:{action}`
-* 示例：
-
-  * `sys:user:view`（用户页可见）
-  * `sys:user:add`（新增按钮）
-  * `sys:user:delete`（删除按钮）
+- 统一格式：`{domain}:{resource}:{action}`
+- 示例：
+  - `sys:user:view`（用户页可见）
+  - `sys:user:add`（新增按钮）
+  - `sys:user:delete`（删除按钮）
 
 ---
 
@@ -145,22 +143,22 @@
 
 ### 7.1 列表页标准结构
 
-* 查询区 Query（折叠/展开）
-* 工具栏 Toolbar（新增/导入/导出/批量）
-* 表格 Table（列配置、slot 渲染、行内操作）
-* 分页 Pagination
-* 可选：高级筛选、列显隐、列拖拽、导出当前筛选
+- 查询区 Query（折叠/展开）
+- 工具栏 Toolbar（新增/导入/导出/批量）
+- 表格 Table（列配置、slot 渲染、行内操作）
+- 分页 Pagination
+- 可选：高级筛选、列显隐、列拖拽、导出当前筛选
 
 ### 7.2 编辑页/弹窗标准结构
 
-* 基础表单 Form（校验、联动、默认值、提交前处理）
-* 可选 Tab（基础信息/扩展信息/关联数据）
-* 可选 子表（明细行增删改）
+- 基础表单 Form（校验、联动、默认值、提交前处理）
+- 可选 Tab（基础信息/扩展信息/关联数据）
+- 可选 子表（明细行增删改）
 
 ### 7.3 详情页标准结构
 
-* Descriptions（字段渲染、字典转义、状态标签）
-* 关联列表（例如操作日志/关联实体）
+- Descriptions（字段渲染、字典转义、状态标签）
+- 关联列表（例如操作日志/关联实体）
 
 ---
 
@@ -171,39 +169,33 @@
 ### 8.1 组件清单
 
 1. **ProTable**
-
-   * 输入：`columns`、`querySchema`、`request`、`rowKey`、`actions`
-   * 内置：查询折叠、分页、loading、空态、工具栏、列格式化
-   * 扩展：列 slot、行操作 slot、表头 slot
+   - 输入：`columns`、`querySchema`、`request`、`rowKey`、`actions`
+   - 内置：查询折叠、分页、loading、空态、工具栏、列格式化
+   - 扩展：列 slot、行操作 slot、表头 slot
 
 2. **ProForm**
-
-   * 输入：`schema`（字段定义）、`modelValue`、`rules`、`layout`
-   * 内置：联动、字典字段、默认值、禁用/隐藏条件
-   * 输出：`submit()`、`validate()`、`reset()`
+   - 输入：`schema`（字段定义）、`modelValue`、`rules`、`layout`
+   - 内置：联动、字典字段、默认值、禁用/隐藏条件
+   - 输出：`submit()`、`validate()`、`reset()`
 
 3. **ProModalForm**
-
-   * 基于 ProForm + Modal
-   * 统一处理：打开、关闭、提交 loading、提交成功回调
+   - 基于 ProForm + Modal
+   - 统一处理：打开、关闭、提交 loading、提交成功回调
 
 4. **ProDescriptions**
-
-   * 用于详情页字段展示
-   * 支持：字典转义、标签、格式化函数
+   - 用于详情页字段展示
+   - 支持：字典转义、标签、格式化函数
 
 5. **Auth（权限组件）**
-
-   * 统一按钮/区块权限控制
+   - 统一按钮/区块权限控制
 
 6. **DictTag（字典标签）**
-
-   * `value + dictKey` -> 渲染对应 label/tag
+   - `value + dictKey` -> 渲染对应 label/tag
 
 ### 8.2 组件抽象层级建议
 
-* `components/pro/`：纯通用（任何项目可复用）
-* `components/biz/`：业务通用（行业/公司内部可复用）
+- `components/pro/`：纯通用（任何项目可复用）
+- `components/biz/`：业务通用（行业/公司内部可复用）
 
 ---
 
@@ -211,21 +203,20 @@
 
 ### 9.1 需求
 
-* 后端枚举值 -> 前端 label/tag 渲染
-* 表单下拉、表格显示、详情显示统一来源
-* 支持：本地字典 + 远程字典
+- 后端枚举值 -> 前端 label/tag 渲染
+- 表单下拉、表格显示、详情显示统一来源
+- 支持：本地字典 + 远程字典
 
 ### 9.2 设计建议
 
-* `dictKey` 为唯一键（如 `user_status`）
-* Dict Store 缓存策略：
+- `dictKey` 为唯一键（如 `user_status`）
+- Dict Store 缓存策略：
+  - 首次使用拉取
+  - 缓存到内存 + 可选 localStorage（带过期）
 
-  * 首次使用拉取
-  * 缓存到内存 + 可选 localStorage（带过期）
-* API：
-
-  * `getDict(dictKey)`
-  * `useDict(dictKey)`（hook）
+- API：
+  - `getDict(dictKey)`
+  - `useDict(dictKey)`（hook）
 
 ---
 
@@ -233,18 +224,18 @@
 
 ### 10.1 request 统一封装能力
 
-* baseURL + timeout
-* token 注入
-* 统一错误码处理（登录过期/无权限/业务错误提示）
-* 请求取消（可选）
-* 下载文件处理（blob）
+- baseURL + timeout
+- token 注入
+- 统一错误码处理（登录过期/无权限/业务错误提示）
+- 请求取消（可选）
+- 下载文件处理（blob）
 
 ### 10.2 错误体验
 
-* 401：跳转登录，保留 redirect
-* 403：无权限页
-* 404：路由不存在页
-* 5xx：友好提示 + 重试建议
+- 401：跳转登录，保留 redirect
+- 403：无权限页
+- 404：路由不存在页
+- 5xx：友好提示 + 重试建议
 
 ---
 
@@ -252,28 +243,27 @@
 
 > 你可以按这个结构组织，后续复制项目非常顺。
 
-* `src/`
+- `src/`
+  - `main.ts`
+  - `app/`（应用级：启动、路由守卫、权限初始化）
+  - `router/`（路由定义、动态路由装配）
+  - `store/`（pinia：user、permission、dict、app）
+  - `layouts/`（基础布局）
+  - `views/`
+    - `dashboard/`
+    - `system/`（用户/角色/菜单/字典/日志）
+    - `example/`（通用能力示例页）
 
-  * `main.ts`
-  * `app/`（应用级：启动、路由守卫、权限初始化）
-  * `router/`（路由定义、动态路由装配）
-  * `store/`（pinia：user、permission、dict、app）
-  * `layouts/`（基础布局）
-  * `views/`
+  - `components/`
+    - `pro/`
+    - `biz/`
 
-    * `dashboard/`
-    * `system/`（用户/角色/菜单/字典/日志）
-    * `example/`（通用能力示例页）
-  * `components/`
-
-    * `pro/`
-    * `biz/`
-  * `api/`（按领域拆分）
-  * `types/`（domain types + 通用 types）
-  * `utils/`（format、download、validate…）
-  * `hooks/`（useTable/useForm/useDict/usePermission）
-  * `assets/` `styles/`
-  * `config/`（环境开关、常量）
+  - `api/`（按领域拆分）
+  - `types/`（domain types + 通用 types）
+  - `utils/`（format、download、validate…）
+  - `hooks/`（useTable/useForm/useDict/usePermission）
+  - `assets/` `styles/`
+  - `config/`（环境开关、常量）
 
 ---
 
@@ -281,29 +271,29 @@
 
 ### M1：可运行骨架
 
-* Layout、路由、登录页、Token（mock）
-* 403/404/重定向
-* Arco 全局配置、主题基础
+- Layout、路由、登录页、Token（mock）
+- 403/404/重定向
+- Arco 全局配置、主题基础
 
 ### M2：通用 CRUD 闭环（最关键）
 
-* 先做“用户管理”全流程：
+- 先做“用户管理”全流程：
+  - 列表/筛选/新增/编辑/详情/删除/批量
 
-  * 列表/筛选/新增/编辑/详情/删除/批量
-* 抽象出 ProTable + ProModalForm
+- 抽象出 ProTable + ProModalForm
 
 ### M3：系统模块补齐
 
-* 角色管理（绑定权限）
-* 菜单管理（生成侧栏与路由）
-* 字典管理（远程字典）
-* 日志管理（操作日志/登录日志）
+- 角色管理（绑定权限）
+- 菜单管理（生成侧栏与路由）
+- 字典管理（远程字典）
+- 日志管理（操作日志/登录日志）
 
 ### M4：可复制性与资产化
 
-* README（10分钟跑起来）
-* 新增模块指南（30分钟出 CRUD）
-* 可选：代码生成模板（plop/hygen）
+- README（10分钟跑起来）
+- 新增模块指南（30分钟出 CRUD）
+- 可选：代码生成模板（plop/hygen）
 
 ---
 
@@ -319,9 +309,9 @@
 
 ## 14. 风险清单与对策（提前规避）
 
-* **风险：通用组件抽象过度** → 对策：先用“用户管理”跑通后再抽象，抽象只来自真实复用点。
-* **风险：权限模型返工** → 对策：先定 RBAC + 权限编码规范，页面/按钮统一走同一套能力。
-* **风险：项目变成示例集合** → 对策：所有示例必须服务于“可复制资产”，不做纯展示页。
+- **风险：通用组件抽象过度** → 对策：先用“用户管理”跑通后再抽象，抽象只来自真实复用点。
+- **风险：权限模型返工** → 对策：先定 RBAC + 权限编码规范，页面/按钮统一走同一套能力。
+- **风险：项目变成示例集合** → 对策：所有示例必须服务于“可复制资产”，不做纯展示页。
 
 ---
 
@@ -337,16 +327,16 @@
 
 ## 16. 附录：最小页面清单（建议拷贝使用）
 
-* /login 登录
-* /dashboard 工作台
-* /system/user 用户管理
-* /system/role 角色管理
-* /system/menu 菜单管理
-* /system/dict 字典管理
-* /system/log 操作日志
-* /profile 个人中心
-* /403 无权限
-* /404 不存在
+- /login 登录
+- /dashboard 工作台
+- /system/user 用户管理
+- /system/role 角色管理
+- /system/menu 菜单管理
+- /system/dict 字典管理
+- /system/log 操作日志
+- /profile 个人中心
+- /403 无权限
+- /404 不存在
 
 ---
 
@@ -360,48 +350,47 @@
 
 **输入（建议契约）**
 
-* `columns: ProTableColumn[]`
+- `columns: ProTableColumn[]`
+  - `title: string`
+  - `dataIndex: string`
+  - `width?: number`
+  - `align?: 'left' | 'center' | 'right'`
+  - `ellipsis?: boolean`
+  - `render?: (row, ctx) => VNode`（可选，若不用 slot）
+  - `dictKey?: string`（若为字典字段，自动转义/标签）
+  - `formatter?: (value, row) => string | VNode`
 
-  * `title: string`
-  * `dataIndex: string`
-  * `width?: number`
-  * `align?: 'left' | 'center' | 'right'`
-  * `ellipsis?: boolean`
-  * `render?: (row, ctx) => VNode`（可选，若不用 slot）
-  * `dictKey?: string`（若为字典字段，自动转义/标签）
-  * `formatter?: (value, row) => string | VNode`
-* `querySchema?: ProField[]`（查询表单 schema）
-* `request: (params: QueryParams) => Promise<{ list: any[]; total: number }>`
-* `rowKey: string | ((row) => string)`
-* `defaultQuery?: Record<string, any>`
-* `pagination?: { pageSize?: number; pageSizeOptions?: number[] } | false`
-* `toolbar?: ProToolbarAction[]`（新增/导入/导出/批量等）
-* `rowSelection?: boolean | RowSelectionOptions`
-* `autoFetch?: boolean`（默认 true）
+- `querySchema?: ProField[]`（查询表单 schema）
+- `request: (params: QueryParams) => Promise<{ list: any[]; total: number }>`
+- `rowKey: string | ((row) => string)`
+- `defaultQuery?: Record<string, any>`
+- `pagination?: { pageSize?: number; pageSizeOptions?: number[] } | false`
+- `toolbar?: ProToolbarAction[]`（新增/导入/导出/批量等）
+- `rowSelection?: boolean | RowSelectionOptions`
+- `autoFetch?: boolean`（默认 true）
 
 **输出（事件/方法）**
 
-* `@search(query)`：点击搜索
-* `@reset()`：重置查询
-* `@change(pageInfo)`：分页/排序变化
-* `expose` 方法：
-
-  * `reload()`（保持分页/查询，重新拉取）
-  * `setQuery(partial)`（写入查询条件）
-  * `getQuery()`
-  * `getSelection()`（返回勾选行）
+- `@search(query)`：点击搜索
+- `@reset()`：重置查询
+- `@change(pageInfo)`：分页/排序变化
+- `expose` 方法：
+  - `reload()`（保持分页/查询，重新拉取）
+  - `setQuery(partial)`（写入查询条件）
+  - `getQuery()`
+  - `getSelection()`（返回勾选行）
 
 **Slots（可扩展点）**
 
-* `#query-extra`：查询区额外插槽
-* `#toolbar-left / #toolbar-right`
-* `#cell-{dataIndex}`：单元格渲染（推荐：优先 slot）
-* `#row-actions`：行操作区（编辑/删除/详情等）
+- `#query-extra`：查询区额外插槽
+- `#toolbar-left / #toolbar-right`
+- `#cell-{dataIndex}`：单元格渲染（推荐：优先 slot）
+- `#row-actions`：行操作区（编辑/删除/详情等）
 
 **约束（保证可复制）**
 
-* 列表页只负责“展示与触发”，数据逻辑集中在 `request` 与 `api/`。
-* 查询 schema 与 columns 尽量可复用：同字段名在列表/表单/详情保持一致。
+- 列表页只负责“展示与触发”，数据逻辑集中在 `request` 与 `api/`。
+- 查询 schema 与 columns 尽量可复用：同字段名在列表/表单/详情保持一致。
 
 ---
 
@@ -411,42 +400,41 @@
 
 **字段 Schema：ProField（建议）**
 
-* `field: string`（绑定 key）
-* `label: string`
-* `type: 'input' | 'textarea' | 'number' | 'select' | 'radio' | 'checkbox' | 'date' | 'daterange' | 'switch' | 'upload' | 'cascader' | 'custom'`
-* `required?: boolean`
-* `rules?: Rule[]`（兼容 Arco Form rules）
-* `defaultValue?: any`
-* `props?: Record<string, any>`（透传到组件）
-* `dictKey?: string`（select/radio 等自动从字典拉 options）
-* `options?: Array<{ label: string; value: any; disabled?: boolean }>`（本地 options）
-* `visible?: (model) => boolean`（动态显示）
-* `disabled?: (model) => boolean`（动态禁用）
-* `watch?: Array<{ fields: string[]; handler: (model) => void }>`（联动）
-* `span?: number`（栅格布局）
+- `field: string`（绑定 key）
+- `label: string`
+- `type: 'input' | 'textarea' | 'number' | 'select' | 'radio' | 'checkbox' | 'date' | 'daterange' | 'switch' | 'upload' | 'cascader' | 'custom'`
+- `required?: boolean`
+- `rules?: Rule[]`（兼容 Arco Form rules）
+- `defaultValue?: any`
+- `props?: Record<string, any>`（透传到组件）
+- `dictKey?: string`（select/radio 等自动从字典拉 options）
+- `options?: Array<{ label: string; value: any; disabled?: boolean }>`（本地 options）
+- `visible?: (model) => boolean`（动态显示）
+- `disabled?: (model) => boolean`（动态禁用）
+- `watch?: Array<{ fields: string[]; handler: (model) => void }>`（联动）
+- `span?: number`（栅格布局）
 
 **输入（建议契约）**
 
-* `modelValue: Record<string, any>`
-* `schema: ProField[]`
-* `layout?: 'horizontal' | 'vertical'`
-* `col?: number`（每行字段数）
-* `labelWidth?: number | 'auto'`
+- `modelValue: Record<string, any>`
+- `schema: ProField[]`
+- `layout?: 'horizontal' | 'vertical'`
+- `col?: number`（每行字段数）
+- `labelWidth?: number | 'auto'`
 
 **输出（事件/方法）**
 
-* `update:modelValue`
-* `@submit(model)`（可选：组件内置提交按钮时）
-* `expose` 方法：
-
-  * `validate()`
-  * `reset()`
-  * `setFieldValue(field, value)`
+- `update:modelValue`
+- `@submit(model)`（可选：组件内置提交按钮时）
+- `expose` 方法：
+  - `validate()`
+  - `reset()`
+  - `setFieldValue(field, value)`
 
 **Slots**
 
-* `#field-{field}`：自定义字段渲染（type=custom 或特殊情况）
-* `#actions`：表单底部按钮区
+- `#field-{field}`：自定义字段渲染（type=custom 或特殊情况）
+- `#actions`：表单底部按钮区
 
 ---
 
@@ -456,23 +444,23 @@
 
 **输入（建议契约）**
 
-* `title: string`
-* `visible: boolean`
-* `schema: ProField[]`
-* `model?: Record<string, any>`（初始/回填数据）
-* `submit: (model) => Promise<any>`（提交函数）
-* `beforeSubmit?: (model) => model`（提交前清洗）
-* `width?: number`
+- `title: string`
+- `visible: boolean`
+- `schema: ProField[]`
+- `model?: Record<string, any>`（初始/回填数据）
+- `submit: (model) => Promise<any>`（提交函数）
+- `beforeSubmit?: (model) => model`（提交前清洗）
+- `width?: number`
 
 **输出（事件）**
 
-* `update:visible`
-* `@success(res)`：提交成功
-* `@cancel()`：取消/关闭
+- `update:visible`
+- `@success(res)`：提交成功
+- `@cancel()`：取消/关闭
 
 **约束**
 
-* 弹窗表单不关心 API 细节，API 由 `submit` 注入。
+- 弹窗表单不关心 API 细节，API 由 `submit` 注入。
 
 ---
 
@@ -482,9 +470,9 @@
 
 **输入（建议契约）**
 
-* `data: Record<string, any>`
-* `items: Array<{ label: string; field: string; dictKey?: string; formatter?: (val, data)=>any; span?: number }>`
-* `columns?: number`
+- `data: Record<string, any>`
+- `items: Array<{ label: string; field: string; dictKey?: string; formatter?: (val, data)=>any; span?: number }>`
+- `columns?: number`
 
 ---
 
@@ -492,8 +480,8 @@
 
 **契约建议**
 
-* 权限入参统一使用 `string[]`：`['sys:user:add']`
-* `hasPerm(perms)` 作为唯一判断入口（便于后期改策略）
+- 权限入参统一使用 `string[]`：`['sys:user:add']`
+- `hasPerm(perms)` 作为唯一判断入口（便于后期改策略）
 
 ---
 
@@ -501,9 +489,9 @@
 
 **契约建议**
 
-* `dictKey: string`
-* `value: string | number`
-* 内部通过 dict store 映射 label，并按 value 输出 tag（颜色策略可配置）
+- `dictKey: string`
+- `value: string | number`
+- 内部通过 dict store 映射 label，并按 value 输出 tag（颜色策略可配置）
 
 ---
 
@@ -513,20 +501,19 @@
 
 ### 18.1 权限编码规范（强制执行）
 
-* 格式：`{domain}:{resource}:{action}`
-* 约束：
-
-  * `domain`：系统域，例如 `sys`、`biz`、`report`
-  * `resource`：资源，例如 `user`、`role`、`menu`、`order`
-  * `action`：动作，例如 `view`、`add`、`edit`、`delete`、`export`、`import`
+- 格式：`{domain}:{resource}:{action}`
+- 约束：
+  - `domain`：系统域，例如 `sys`、`biz`、`report`
+  - `resource`：资源，例如 `user`、`role`、`menu`、`order`
+  - `action`：动作，例如 `view`、`add`、`edit`、`delete`、`export`、`import`
 
 **示例**
 
-* `sys:user:view`（用户页面）
-* `sys:user:add`（新增）
-* `sys:user:edit`（编辑）
-* `sys:user:delete`（删除）
-* `sys:user:export`（导出）
+- `sys:user:view`（用户页面）
+- `sys:user:add`（新增）
+- `sys:user:edit`（编辑）
+- `sys:user:delete`（删除）
+- `sys:user:export`（导出）
 
 ---
 
@@ -535,36 +522,36 @@
 > 菜单既是“侧栏显示结构”，也是“路由装配来源”。
 
 ```ts
-export type MenuType = 'dir' | 'menu' | 'link'
+export type MenuType = 'dir' | 'menu' | 'link';
 
 export interface MenuItem {
-  id: string
-  parentId?: string
-  type: MenuType
-  name: string                 // 菜单名称
-  code: string                 // 唯一编码（可用于权限/埋点）
-  path: string                 // 路由 path（或外链 url）
-  component?: string           // 页面组件路径（动态路由时使用，如 'system/user/index')
-  icon?: string
-  order?: number
-  visible?: boolean            // 是否在侧栏可见
-  keepAlive?: boolean          // 是否缓存
-  perms?: string[]             // 进入页面所需权限（页面级）
-  buttons?: string[]           // 页面内按钮权限集合（可选：用于预加载）
+  id: string;
+  parentId?: string;
+  type: MenuType;
+  name: string; // 菜单名称
+  code: string; // 唯一编码（可用于权限/埋点）
+  path: string; // 路由 path（或外链 url）
+  component?: string; // 页面组件路径（动态路由时使用，如 'system/user/index')
+  icon?: string;
+  order?: number;
+  visible?: boolean; // 是否在侧栏可见
+  keepAlive?: boolean; // 是否缓存
+  perms?: string[]; // 进入页面所需权限（页面级）
+  buttons?: string[]; // 页面内按钮权限集合（可选：用于预加载）
   meta?: {
-    title?: string
-    affix?: boolean
-    breadcrumb?: boolean
-    activeMenu?: string
-  }
-  children?: MenuItem[]
+    title?: string;
+    affix?: boolean;
+    breadcrumb?: boolean;
+    activeMenu?: string;
+  };
+  children?: MenuItem[];
 }
 ```
 
 **约束**
 
-* `path` 与 `component` 的约定必须在 README 写清楚。
-* `visible=false` 的菜单不显示，但仍可用于路由存在（如详情页）。
+- `path` 与 `component` 的约定必须在 README 写清楚。
+- `visible=false` 的菜单不显示，但仍可用于路由存在（如详情页）。
 
 ---
 
@@ -572,14 +559,14 @@ export interface MenuItem {
 
 ```ts
 export interface AppRouteMeta {
-  title: string
-  icon?: string
-  perms?: string[]       // 路由进入权限
-  keepAlive?: boolean
-  hidden?: boolean
-  affix?: boolean
-  breadcrumb?: boolean
-  activeMenu?: string
+  title: string;
+  icon?: string;
+  perms?: string[]; // 路由进入权限
+  keepAlive?: boolean;
+  hidden?: boolean;
+  affix?: boolean;
+  breadcrumb?: boolean;
+  activeMenu?: string;
 }
 ```
 
@@ -589,25 +576,25 @@ export interface AppRouteMeta {
 
 ```ts
 export interface SessionUser {
-  id: string
-  username: string
-  nickname?: string
-  avatar?: string
-  roles: string[]
-  perms: string[]          // 全量权限点（按钮/接口）
+  id: string;
+  username: string;
+  nickname?: string;
+  avatar?: string;
+  roles: string[];
+  perms: string[]; // 全量权限点（按钮/接口）
 }
 
 export interface SessionPayload {
-  token: string
-  user: SessionUser
-  menus: MenuItem[]        // 若启用动态菜单
+  token: string;
+  user: SessionUser;
+  menus: MenuItem[]; // 若启用动态菜单
 }
 ```
 
 **策略建议**
 
-* MVP 可只返回 `token + user.perms`，菜单用前端静态。
-* 升级模式返回 `menus` 做动态路由。
+- MVP 可只返回 `token + user.perms`，菜单用前端静态。
+- 升级模式返回 `menus` 做动态路由。
 
 ---
 
@@ -615,20 +602,20 @@ export interface SessionPayload {
 
 ```ts
 export interface ApiResponse<T> {
-  code: number
-  message: string
-  data: T
+  code: number;
+  message: string;
+  data: T;
 }
 
 export interface PageQuery {
-  pageNum: number
-  pageSize: number
-  sort?: string
+  pageNum: number;
+  pageSize: number;
+  sort?: string;
 }
 
 export interface PageResult<T> {
-  list: T[]
-  total: number
+  list: T[];
+  total: number;
 }
 ```
 
@@ -640,13 +627,13 @@ export interface PageResult<T> {
 
 > 新增任何模块前必须先填这张清单（写在模块 README 或注释里）。
 
-* 模块域：domain = ?
-* 资源名：resource = ?
-* 页面权限：`domain:resource:view`
-* 按钮权限：add/edit/delete/export/import = ?
-* 字段字典：哪些字段使用 dictKey？
-* 列表查询字段：哪些？默认值？
-* 详情页字段：哪些？格式化规则？
+- 模块域：domain = ?
+- 资源名：resource = ?
+- 页面权限：`domain:resource:view`
+- 按钮权限：add/edit/delete/export/import = ?
+- 字段字典：哪些字段使用 dictKey？
+- 列表查询字段：哪些？默认值？
+- 详情页字段：哪些？格式化规则？
 
 ---
 
