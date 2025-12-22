@@ -41,15 +41,6 @@ export const routes: RouteRecordRaw[] = [
         meta: { title: '偏好设置' },
         component: () => import('@/views/setting/index.vue'),
       },
-      {
-        path: '/:pathMatch(.*)*',
-        redirect: (to) => {
-          const suffix = Array.isArray(to.params.pathMatch)
-            ? to.params.pathMatch.join('/')
-            : to.params.pathMatch;
-          return suffix ? `/${suffix}` : '/';
-        },
-      },
     ],
   },
   // ========== 404 ==========
