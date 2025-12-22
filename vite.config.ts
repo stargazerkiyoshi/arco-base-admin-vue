@@ -1,5 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
-import { defineConfig, type PluginOption } from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { viteMockServe } from 'vite-plugin-mock';
 
@@ -10,9 +10,9 @@ export default defineConfig(({ mode }) => ({
     viteMockServe({
       mockPath: 'mock',
       watchFiles: true,
-      // Enable mock server in all non-prod modes (dev/test/pre/etc.)
       enable: mode !== 'prod' && mode !== 'production',
-    }) as PluginOption,
+      logger: true,
+    }),
   ],
   resolve: {
     alias: {

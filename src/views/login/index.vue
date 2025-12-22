@@ -7,6 +7,10 @@ import { login } from '@/services/user';
 import { storage } from '@/utils/storage';
 import { ApiCode } from '@/constants/api';
 
+defineOptions({
+  name: 'loginPage',
+});
+
 const formState = reactive({
   username: '',
   password: '',
@@ -31,7 +35,7 @@ const handleSubmit = async () => {
     if (res.code === ApiCode.Success && res.data?.token) {
       storage.set('token', res.data.token);
       Message.success('登录成功');
-      router.push('/');
+      router.push('/app/dashboard');
     } else {
       const message =
         res.code === ApiCode.LoginFailed ? '用户名或密码错误' : res.message || '登录失败';
