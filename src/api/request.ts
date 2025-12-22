@@ -4,7 +4,6 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
-import { storage } from '@/utils/storage';
 
 export interface ApiResponse<T> {
   code?: number;
@@ -13,17 +12,22 @@ export interface ApiResponse<T> {
   [key: string]: unknown;
 }
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || '/';
+const baseURL = import.meta.env.VITE_API_BASE_URL || '';
 
 const httpClient: AxiosInstance = axios.create({
   baseURL,
   timeout: 10_000,
-  withCredentials: false,
 });
+
+let tokenGetter: (() => string | null) | null = null;
+
+export const setAuthTokenGetter = (getter: () => string | null) => {
+  tokenGetter = getter;
+};
 
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = storage.get<string>('token');
+    const token = tokenGetter?.() ?? localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -41,27 +45,5 @@ export const request = async <T = unknown>(config: AxiosRequestConfig): Promise<
   const res = await httpClient.request<ApiResponse<T>>(config);
   return res.data;
 };
-
-export const get = <T = unknown>(
-  url: string,
-  config?: AxiosRequestConfig,
-): Promise<ApiResponse<T>> => request<T>({ ...config, method: 'get', url });
-
-export const post = <T = unknown>(
-  url: string,
-  data?: unknown,
-  config?: AxiosRequestConfig,
-): Promise<ApiResponse<T>> => request<T>({ ...config, method: 'post', url, data });
-
-export const put = <T = unknown>(
-  url: string,
-  data?: unknown,
-  config?: AxiosRequestConfig,
-): Promise<ApiResponse<T>> => request<T>({ ...config, method: 'put', url, data });
-
-export const del = <T = unknown>(
-  url: string,
-  config?: AxiosRequestConfig,
-): Promise<ApiResponse<T>> => request<T>({ ...config, method: 'delete', url });
 
 export default httpClient;

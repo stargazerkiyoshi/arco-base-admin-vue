@@ -19,7 +19,6 @@ export const routes: RouteRecordRaw[] = [
       requiresAuth: true,
     },
     children: [
-      // 首页 / 仪表盘
       {
         path: 'dashboard',
         name: 'dashboard',
@@ -27,21 +26,40 @@ export const routes: RouteRecordRaw[] = [
         meta: {
           title: '首页',
           icon: 'icon-dashboard',
+          // 页面访问权限编码映射：dashboard -> dashboard:home:view
+          permission: 'dashboard:home:view',
         },
       },
       {
         path: 'workbench',
         name: 'workbench',
-        meta: { title: '工作台' },
+        meta: {
+          title: '工作台',
+          // 页面访问权限编码映射：workbench -> workbench:view
+          permission: 'workbench:view',
+        },
         component: () => import('@/views/workbench/index.vue'),
       },
       {
         path: 'settings',
         name: 'settings',
-        meta: { title: '偏好设置' },
+        meta: {
+          title: '偏好设置',
+          // 页面访问权限编码映射：settings -> settings:view
+          permission: 'settings:view',
+        },
         component: () => import('@/views/setting/index.vue'),
       },
     ],
+  },
+  {
+    path: '/403',
+    name: 'Forbidden',
+    component: () => import('@/views/403/index.vue'),
+    meta: {
+      title: '403',
+      public: true,
+    },
   },
   // ========== 404 ==========
   {
