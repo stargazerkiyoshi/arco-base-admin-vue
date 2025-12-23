@@ -8,31 +8,67 @@ import { Message } from '@arco-design/web-vue';
 import { ApiCode } from '@/constants/api';
 import { setTokenGetter, setHandleUnauthorized } from '@/api/request';
 
-const APP_MENU_NAMES = new Set(['dashboard', 'workbench', 'settings']);
+const APP_MENU_NAMES = new Set([
+  'dashboard',
+  'workbench',
+  'settings',
+  'componentDemo',
+  'baseTableDemo',
+]);
 
-const sortMenus = (list: MenuNode[]) =>
-  list.slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+const sortMenus = (list: MenuNode[]): MenuNode[] =>
+  list
+    .slice()
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((item) => ({
+      ...item,
+      children: item.children ? sortMenus(item.children) : undefined,
+    }));
 
 const buildMenusFromRoutes = (permissionSet?: Set<string>) => {
   const routes = router
     .getRoutes()
     .filter((route) => route.name && APP_MENU_NAMES.has(String(route.name)));
 
-  return sortMenus(
-    routes
-      .map((route) => {
-        const perm = route.meta?.permission as string | undefined;
-        if (permissionSet && perm && !permissionSet.has(perm)) return null;
-        return {
-          id: String(route.name),
-          name: (route.meta?.title as string) || String(route.name),
-          type: 'MENU',
-          icon: route.meta?.icon as string | undefined,
-          routeName: String(route.name),
-        } satisfies MenuNode;
-      })
-      .filter(Boolean) as MenuNode[],
-  );
+  const filteredRoutes = routes.filter((route) => {
+    const perm = route.meta?.permission as string | undefined;
+    return !(permissionSet && perm && !permissionSet.has(perm));
+  });
+
+  const nodeMap = new Map<string, MenuNode>();
+  const routeMap = new Map<string, (typeof filteredRoutes)[number]>();
+
+  filteredRoutes.forEach((route) => {
+    const name = String(route.name);
+    routeMap.set(name, route);
+    nodeMap.set(name, {
+      id: name,
+      name: (route.meta?.title as string) || name,
+      type: 'MENU',
+      icon: route.meta?.icon as string | undefined,
+      routeName: name,
+    });
+  });
+
+  const roots: MenuNode[] = [];
+  nodeMap.forEach((node, name) => {
+    const route = routeMap.get(name);
+    if (!route) return;
+    const parent = filteredRoutes
+      .filter((r) => r.path !== route.path && route.path.startsWith(`${r.path}/`))
+      .sort((a, b) => b.path.length - a.path.length)[0];
+    const parentName = parent?.name ? String(parent.name) : undefined;
+
+    if (parentName && nodeMap.has(parentName)) {
+      const parentNode = nodeMap.get(parentName)!;
+      parentNode.children = parentNode.children || [];
+      parentNode.children.push(node);
+    } else {
+      roots.push(node);
+    }
+  });
+
+  return sortMenus(roots);
 };
 
 export const useAuthStore = defineStore('auth', () => {

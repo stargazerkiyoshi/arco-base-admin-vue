@@ -52,6 +52,27 @@ export const routes: RouteRecordRaw[] = [
         },
         component: () => import('@/views/setting/index.vue'),
       },
+      {
+        path: 'demo',
+        name: 'componentDemo',
+        meta: {
+          title: '组件示例',
+          icon: 'icon-apps',
+        },
+        redirect: '/app/demo/base-table',
+        component: () => import('@/views/demo/index.vue'),
+        children: [
+          {
+            path: 'base-table',
+            name: 'baseTableDemo',
+            meta: {
+              title: 'BaseTable 示例',
+              icon: 'icon-apps',
+            },
+            component: () => import('@/views/demo/base-table/index.vue'),
+          },
+        ],
+      },
     ],
   },
   {
