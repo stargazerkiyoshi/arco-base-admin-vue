@@ -1,11 +1,8 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { Message } from '@arco-design/web-vue';
 import { MyCard } from '@/components/my/card';
-import { login } from '@/api/auth';
-import { storage } from '@/utils/storage';
-import { ApiCode } from '@/constants/api';
+import { useAuthStore } from '@/stores/auth';
 
 defineOptions({
   name: 'loginPage',
@@ -17,8 +14,7 @@ const formState = reactive({
 });
 
 const loading = ref(false);
-const router = useRouter();
-const route = useRoute();
+const { handlelogin } = useAuthStore();
 
 const handleSubmit = async () => {
   if (!formState.username || !formState.password) {
@@ -27,28 +23,8 @@ const handleSubmit = async () => {
   }
 
   loading.value = true;
-  try {
-    const res = await login({
-      username: formState.username,
-      password: formState.password,
-    });
-
-    if (res.code === ApiCode.Success && res.data?.token) {
-      storage.set('token', res.data.token);
-      Message.success('登录成功');
-      const redirect = (route.query.redirect as string) || '/app/dashboard';
-      router.push(redirect);
-    } else {
-      const message =
-        res.code === ApiCode.LoginFailed ? '用户名或密码错误' : res.message || '登录失败';
-      Message.error(message);
-    }
-  } catch (error) {
-    console.error(error);
-    Message.error('登录失败，请稍后重试');
-  } finally {
-    loading.value = false;
-  }
+  await handlelogin(Object.assign({}, formState));
+  loading.value = false;
 };
 </script>
 

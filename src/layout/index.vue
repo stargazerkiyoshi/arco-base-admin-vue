@@ -126,8 +126,8 @@ const toggleCollapsed = () => {
         :style="{ borderInlineEnd: 'none' }"
         @menu-item-click="handleMenuClick"
       >
-        <template v-for="item in menuItems" :key="item.key">
-          <a-sub-menu v-if="item.children?.length" :key="item.key">
+        <template v-for="item in menuItems">
+          <a-sub-menu v-if="item.children?.length" :key="`${item.key}-sub`">
             <template #icon>
               <component v-if="item.icon" :is="item.icon" />
             </template>
@@ -139,7 +139,7 @@ const toggleCollapsed = () => {
               {{ child.label }}
             </a-menu-item>
           </a-sub-menu>
-          <a-menu-item v-else>
+          <a-menu-item v-else :key="`${item.key}`">
             <template #icon>
               <component v-if="item.icon" :is="item.icon" />
             </template>
