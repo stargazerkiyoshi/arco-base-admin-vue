@@ -35,40 +35,6 @@ const buildMenusFromRoutes = (permissionSet?: Set<string>) => {
   );
 };
 
-const buildMenusFromBackend = (menus: MenuNode[], permissionSet?: Set<string>) => {
-  const routeMap = new Map<string, ReturnType<typeof router.getRoutes>[number]>();
-  router.getRoutes().forEach((route) => {
-    if (route.name) routeMap.set(String(route.name), route);
-  });
-
-  const filterMenus = (nodes: MenuNode[]): MenuNode[] => {
-    const filtered: MenuNode[] = [];
-    nodes.forEach((node) => {
-      if (node.hidden) return;
-      const copy: MenuNode = { ...node };
-      const currentRoute = copy.routeName ? routeMap.get(String(copy.routeName)) : undefined;
-      if (copy.type === 'MENU') {
-        if (!copy.routeName || !currentRoute) return;
-        const perm = copy.perm || (currentRoute.meta?.permission as string | undefined);
-        if (permissionSet && perm && !permissionSet.has(perm)) return;
-      }
-      if (copy.children?.length) {
-        copy.children = filterMenus(copy.children);
-      }
-      if (copy.type === 'CATALOG') {
-        if (copy.children && copy.children.length > 0) {
-          filtered.push({ ...copy, children: sortMenus(copy.children) });
-        }
-        return;
-      }
-      filtered.push(copy);
-    });
-    return sortMenus(filtered);
-  };
-
-  return filterMenus(menus);
-};
-
 export const useAuthStore = defineStore('auth', () => {
   const user = ref<AuthUser | null>(null);
   const permissions = ref<string[]>([]);
@@ -133,12 +99,7 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = null;
       }
       permissions.value = payload?.permissions ?? [];
-
-      if (payload?.menus && payload.menus.length > 0) {
-        menus.value = buildMenusFromBackend(payload.menus, permissionSet.value);
-      } else {
-        menus.value = buildMenusFromRoutes(permissionSet.value);
-      }
+      menus.value = buildMenusFromRoutes(permissionSet.value);
       isGettedAuth.value = true;
     } catch {
       user.value = null;

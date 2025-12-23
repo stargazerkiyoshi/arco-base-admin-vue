@@ -12,11 +12,13 @@ import {
   IconUser,
   IconHome,
 } from '@arco-design/web-vue/es/icon';
+import { useAuthStore } from '@/stores/auth';
 
 type MenuItem = {
   key: string;
   label: string;
-  icon: Component;
+  icon?: Component;
+  children?: MenuItem[];
 };
 
 defineOptions({
@@ -27,15 +29,49 @@ const router = useRouter();
 const route = useRoute();
 const collapsed = ref(false);
 const searchValue = ref('');
+const authStore = useAuthStore();
 
-const menuItems: MenuItem[] = [
-  { key: '/app/dashboard', label: '总览', icon: IconDashboard },
-  { key: '/app/workbench', label: '工作台', icon: IconApps },
-  { key: '/app/settings', label: '偏好设置', icon: IconSettings },
-];
+const iconMap: Record<string, Component> = {
+  'icon-dashboard': IconDashboard,
+  'icon-apps': IconApps,
+  'icon-settings': IconSettings,
+};
+
+const resolvePath = (name?: string) => {
+  if (!name) return '';
+  try {
+    return router.resolve({ name }).path;
+  } catch {
+    return '';
+  }
+};
+
+const menuItems = computed<MenuItem[]>(() => {
+  const build = (items: typeof authStore.menus): MenuItem[] =>
+    items.map((item) => {
+      const icon = item.icon ? (iconMap[item.icon] ?? IconApps) : undefined;
+      const children = item.children?.length ? build(item.children) : undefined;
+      return {
+        key: resolvePath(item.routeName) || String(item.id),
+        label: item.name,
+        icon,
+        children,
+      };
+    });
+  return build(authStore.menus);
+});
 
 const selectedKeys = computed(() => {
-  const active = menuItems
+  const flatItems: MenuItem[] = [];
+  const flatten = (items: MenuItem[]) => {
+    items.forEach((item) => {
+      flatItems.push(item);
+      if (item.children) flatten(item.children);
+    });
+  };
+  flatten(menuItems.value);
+
+  const active = flatItems
     .slice()
     .sort((a, b) => b.key.length - a.key.length)
     .find((item) => route.path === item.key || route.path.startsWith(`${item.key}/`))?.key;
@@ -90,12 +126,26 @@ const toggleCollapsed = () => {
         :style="{ borderInlineEnd: 'none' }"
         @menu-item-click="handleMenuClick"
       >
-        <a-menu-item v-for="item in menuItems" :key="item.key">
-          <template #icon>
-            <component :is="item.icon" />
-          </template>
-          {{ item.label }}
-        </a-menu-item>
+        <template v-for="item in menuItems" :key="item.key">
+          <a-sub-menu v-if="item.children?.length" :key="item.key">
+            <template #icon>
+              <component v-if="item.icon" :is="item.icon" />
+            </template>
+            <template #title>{{ item.label }}</template>
+            <a-menu-item v-for="child in item.children" :key="child.key">
+              <template #icon>
+                <component v-if="child.icon" :is="child.icon" />
+              </template>
+              {{ child.label }}
+            </a-menu-item>
+          </a-sub-menu>
+          <a-menu-item v-else>
+            <template #icon>
+              <component v-if="item.icon" :is="item.icon" />
+            </template>
+            {{ item.label }}
+          </a-menu-item>
+        </template>
       </a-menu>
     </a-layout-sider>
 

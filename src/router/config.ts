@@ -27,7 +27,7 @@ export const routes: RouteRecordRaw[] = [
           title: '首页',
           icon: 'icon-dashboard',
           // 页面访问权限编码映射：dashboard -> dashboard:home:view
-          permission: 'dashboard:home:view',
+          permission: 'dashboard:view',
         },
       },
       {
@@ -35,6 +35,7 @@ export const routes: RouteRecordRaw[] = [
         name: 'workbench',
         meta: {
           title: '工作台',
+          icon: 'icon-apps',
           // 页面访问权限编码映射：workbench -> workbench:view
           permission: 'workbench:view',
         },
@@ -45,6 +46,7 @@ export const routes: RouteRecordRaw[] = [
         name: 'settings',
         meta: {
           title: '偏好设置',
+          icon: 'icon-settings',
           // 页面访问权限编码映射：settings -> settings:view
           permission: 'settings:view',
         },

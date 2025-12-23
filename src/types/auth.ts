@@ -23,7 +23,6 @@ export interface MenuNode {
 export interface MeResponse {
   user: AuthUser;
   permissions?: string[];
-  menus?: MenuNode[];
 }
 
 export interface LoginRequest {
