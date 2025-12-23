@@ -4,6 +4,7 @@ import axios, {
   type AxiosResponse,
   type InternalAxiosRequestConfig,
 } from 'axios';
+import { ApiCode } from '@/constants/api';
 
 export interface ApiResponse<T> {
   code?: number;
@@ -19,15 +20,18 @@ const httpClient: AxiosInstance = axios.create({
   timeout: 10_000,
 });
 
-let tokenGetter: (() => string | null) | null = null;
-
-export const setAuthTokenGetter = (getter: () => string | null) => {
-  tokenGetter = getter;
+let tokenGetter: (() => unknown) | null = null;
+export const setTokenGetter = (fn: () => unknown) => {
+  tokenGetter = fn;
+};
+let handleUnauthorized: (() => unknown) | null = null;
+export const setHandleUnauthorized = (fn: (() => unknown) | null) => {
+  handleUnauthorized = fn;
 };
 
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const token = tokenGetter?.() ?? localStorage.getItem('token');
+    const token = tokenGetter?.();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -37,8 +41,19 @@ httpClient.interceptors.request.use(
 );
 
 httpClient.interceptors.response.use(
-  (response: AxiosResponse<ApiResponse<unknown>>) => response,
-  (error) => Promise.reject(error),
+  (response: AxiosResponse<ApiResponse<unknown>>) => {
+    if (response.data?.code === ApiCode.Unauthorized) {
+      handleUnauthorized?.();
+      return Promise.reject(new Error(response.data.message || 'Unauthorized'));
+    }
+    return response;
+  },
+  (error) => {
+    if (error?.response?.status === 401) {
+      handleUnauthorized?.();
+    }
+    return Promise.reject(error);
+  },
 );
 
 export const request = async <T = unknown>(config: AxiosRequestConfig): Promise<ApiResponse<T>> => {

@@ -1,7 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock';
-import type { LoginRequest, LoginResponse } from '../src/types/api/auth';
-import type { FetchUserInfoResponse } from '../src/types/api/user';
-import type { UserInfo } from '../src/types/models/user';
+import type { AuthUser, LoginRequest, LoginResponse } from '../src/types/auth';
 import type { MeResponse } from '../src/types/auth';
 import { ApiCode } from '../src/constants/api';
 
@@ -49,21 +47,7 @@ export default [
       }) satisfies { code: number; data: MeResponse; message: string },
   },
   {
-    url: '/api/user/info',
-    method: 'get',
-    response: () =>
-      ({
-        code: ApiCode.Success,
-        data: {
-          id: 1,
-          name: 'Mock User',
-          role: 'admin',
-        } satisfies FetchUserInfoResponse,
-        message: 'ok',
-      }) satisfies { code: number; data: FetchUserInfoResponse; message: string },
-  },
-  {
-    url: '/api/user/login',
+    url: '/api/auth/login',
     method: 'post',
     response: ({ body }: { body: LoginRequest }) =>
       ({
@@ -72,9 +56,9 @@ export default [
           token: 'mock-token-123',
           user: {
             id: 1,
-            name: body.username || 'Mock User',
-            role: 'admin',
-          } satisfies UserInfo,
+            username: body.username || 'Mock User',
+            status: 1,
+          } satisfies AuthUser,
         } satisfies LoginResponse,
         message: 'login success',
       }) satisfies { code: number; data: LoginResponse; message: string },

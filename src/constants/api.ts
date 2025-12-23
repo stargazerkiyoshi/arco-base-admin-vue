@@ -1,7 +1,7 @@
 export const ApiCode = {
-  Success: 0,
-  Fail: 1,
-  LoginFailed: 1001,
+  Success: 1001,
+  Fail: 1002,
+  LoginFailed: 1003,
   Unauthorized: 401,
   Forbidden: 403,
   NotFound: 404,

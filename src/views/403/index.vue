@@ -6,6 +6,9 @@ defineOptions({
 });
 
 const router = useRouter();
+const goLogin = () => {
+  router.push('/login');
+};
 const goHome = () => {
   router.push('/app/dashboard');
 };
@@ -19,6 +22,7 @@ const goHome = () => {
       请确认账号是否具备当前功能权限，或联系管理员开通权限。您也可以返回工作台继续浏览。
     </p>
     <div class="flex items-center gap-2">
+      <a-button type="primary" @click="goLogin">去登录</a-button>
       <a-button type="primary" @click="goHome">返回首页</a-button>
       <a-button @click="router.back()">返回上一页</a-button>
     </div>

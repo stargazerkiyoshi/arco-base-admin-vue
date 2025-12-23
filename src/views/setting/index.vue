@@ -1,5 +1,4 @@
-<script lang="ts">
-import { defineOptions } from 'vue';
+<script setup lang="ts">
 defineOptions({
   name: 'settingPage',
 });

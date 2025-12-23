@@ -18,7 +18,7 @@ const permDirective: Directive = {
     const code = binding.value as string;
     if (!code) return;
     const authStore = useAuthStore();
-    if (authStore.isLoaded && !authStore.hasPerm(code)) {
+    if (!authStore.hasPerm(code)) {
       el.remove();
     }
   },
@@ -26,7 +26,7 @@ const permDirective: Directive = {
     const code = binding.value as string;
     if (!code) return;
     const authStore = useAuthStore();
-    if (authStore.isLoaded && !authStore.hasPerm(code)) {
+    if (!authStore.hasPerm(code)) {
       el.remove();
     }
   },

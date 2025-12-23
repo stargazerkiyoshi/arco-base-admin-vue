@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { Message } from '@arco-design/web-vue';
 import { MyCard } from '@/components/my/card';
-import { login } from '@/services/user';
+import { login } from '@/api/auth';
 import { storage } from '@/utils/storage';
 import { ApiCode } from '@/constants/api';
 
@@ -18,6 +18,7 @@ const formState = reactive({
 
 const loading = ref(false);
 const router = useRouter();
+const route = useRoute();
 
 const handleSubmit = async () => {
   if (!formState.username || !formState.password) {
@@ -35,7 +36,8 @@ const handleSubmit = async () => {
     if (res.code === ApiCode.Success && res.data?.token) {
       storage.set('token', res.data.token);
       Message.success('登录成功');
-      router.push('/app/dashboard');
+      const redirect = (route.query.redirect as string) || '/app/dashboard';
+      router.push(redirect);
     } else {
       const message =
         res.code === ApiCode.LoginFailed ? '用户名或密码错误' : res.message || '登录失败';
